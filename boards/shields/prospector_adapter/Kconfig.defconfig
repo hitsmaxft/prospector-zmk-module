@@ -3,6 +3,8 @@ if SHIELD_PROSPECTOR_ADAPTER
 config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
     default y
 
+if PROSPECTOR_DISPLAY_SUPPORT
+
 config ZMK_DISPLAY
    default y
 
@@ -59,6 +61,8 @@ config PWM
 
 config LED
     default y
+
+endif # PROSPECTOR_DISPLAY_SUPPORT
 
 # Ambient light sensor settings moved to main Kconfig
 

@@ -68,7 +68,7 @@ config ZMK_STATUS_ADV_ACTIVE_INTERVAL_MS
       200ms = 5Hz for responsive status updates.
 
 config ZMK_STATUS_ADV_IDLE_INTERVAL_MS
-    int "Idle advertisement interval in milliseconds" 
+    int "Idle advertisement interval in milliseconds"
     range 500 300000
     default 30000
     depends on ZMK_STATUS_ADV_ACTIVITY_BASED
@@ -105,6 +105,16 @@ config PROSPECTOR_MODE_SCANNER
     help
       Enable scanner mode to receive status advertisements from ZMK keyboards.
       In this mode, Prospector acts as a standalone status display device.
+
+config PROSPECTOR_DISPLAY_SUPPORT
+    bool "Enable LVGL display support"
+    default y
+    help
+      Enable LVGL display widgets and 7789 display functionality.
+      Disable this to reduce code size and power consumption when using
+      alternative displays (e.g., OLED) or headless operation.
+      Applies to both scanner mode and advertising keyboards with displays.
+      Core functionality will continue to work without display support.
 
 config PROSPECTOR_MULTI_KEYBOARD
     bool "Support multiple keyboards"
@@ -243,13 +253,13 @@ config PROSPECTOR_USE_AMBIENT_LIGHT_SENSOR
       When enabled, automatically enables I2C, SENSOR framework, and APDS9960 driver.
       Uses polling mode (no interrupt pin required) for 4-pin connector operation.
       When disabled, uses fixed brightness mode.
-      
+
       Hardware connection (4-pin connector mode):
       - SDA = D4 (P0.04)
-      - SCL = D5 (P0.05) 
+      - SCL = D5 (P0.05)
       - VCC = 3.3V, GND = GND
       - INT pin not needed (polling mode)
-      
+
       User-friendly: Only this one setting needs to be changed!
 
 config PROSPECTOR_ALS_MIN_BRIGHTNESS
@@ -443,7 +453,7 @@ config ZMK_STATUS_ADV_WPM_DECAY_TIMEOUT_SECONDS
       Set to 0 to auto-calculate as 2x the window size (recommended).
       Manual values: 10-300 seconds for custom timeout behavior.
       Default 0 = auto (60s for 30s window, 20s for 10s window, etc.)
-      
+
       Examples:
       - 0: Auto-calculate (recommended) - 2x window size
       - 30: Manual 30-second timeout
@@ -458,10 +468,10 @@ config ZMK_STATUS_ADV_WMP_DECAY_TIMEOUT_SECONDS
     help
       DEPRECATED: This is a typo alias for ZMK_STATUS_ADV_WPM_DECAY_TIMEOUT_SECONDS.
       Please use ZMK_STATUS_ADV_WPM_DECAY_TIMEOUT_SECONDS instead.
-      
+
       This setting handles the common typo (WMP instead of WPM) found in external
       keyboard configurations to prevent build errors.
-      
+
       This alias will be removed in future versions. Please update your configuration
       to use the correct setting name: ZMK_STATUS_ADV_WPM_DECAY_TIMEOUT_SECONDS
 
